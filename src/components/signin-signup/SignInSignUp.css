@@ -1,0 +1,239 @@
+.signup {
+  width: 85%;
+  height: calc(100vh - 4em);
+  margin: 2em auto;
+  border-radius: 15px;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+  padding: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.signup__form {
+  margin-right: 4em;
+  display: flex;
+  flex-direction: column;
+}
+
+.signup__title {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.form-group {
+  position: relative;
+  line-height: 18px;
+  vertical-align: top;
+}
+
+.form-group input:focus {
+  border-color: #222;
+}
+
+.form-group__danger input,
+.input-danger {
+  border-color: var(--clr-accent) !important;
+  background-color: rgba(245, 56, 56, 0.3);
+}
+
+.form-group input:focus + .control-label svg,
+.form-group__danger label svg {
+  fill: var(--clr-accent) !important;
+}
+
+.form-group label {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 0;
+  top: calc(-50% + 2em);
+}
+
+.form-group label svg {
+  width: 15px;
+  height: 15px;
+  fill: #666;
+}
+
+.form-group__check {
+  display: flex;
+  line-height: 20px;
+  align-items: center;
+  margin-bottom: 2.5em;
+}
+
+.form-group__check input {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #666;
+  position: relative;
+  border-radius: 2px;
+  margin: 0;
+  margin-right: 1em;
+  padding: 0.3em;
+  display: block;
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-group__check input::before {
+  content: '\2713';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  left: 50%;
+  top: -25%;
+  color: var(--clr-accent);
+  transform: translate(-50%);
+  opacity: 0;
+}
+
+.form-group__check input:checked::before {
+  opacity: 1;
+}
+
+.checkbox-danger {
+  border-color: var(--clr-accent) !important;
+}
+
+.form-group__check label {
+  position: sticky;
+  font-size: 14px;
+  width: 100%;
+  color: var(--clr-dark);
+}
+
+.form-group__check label span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn-submit .btn {
+  width: 100px;
+  border: 1px solid var(--clr-accent);
+  padding: 0.8em 0;
+  margin-right: 0.9em;
+}
+
+.btn-submit .btn-outline {
+  width: 140px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.social__login {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-left: auto;
+  margin-top: 1em;
+  align-items: center;
+}
+
+.social__login p {
+  margin-right: 1em;
+}
+
+.social__login svg {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.social__login svg:nth-child(2) {
+  fill: #4267b2;
+}
+
+.social__login svg:nth-child(3) {
+  fill: #1da1f2;
+}
+
+.social__login svg:hover {
+  transform: scale(1.2);
+}
+
+.link {
+  color: var(--clr-text);
+  cursor: pointer;
+  font-weight: var(--fw-med);
+  font-size: 16px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  transition: color 0.3s ease;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+}
+
+.link--arrowed {
+  height: 2rem;
+  line-height: 1.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+}
+
+.arrow-icon {
+  position: relative;
+  top: -1px;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.arrow-icon--arrow {
+  fill: var(--clr-text);
+  stroke-width: 0.1;
+}
+
+.arrow-icon--circle {
+  transition: stroke-dashoffset 0.3s ease;
+  stroke-dasharray: 95;
+  stroke-dashoffset: 95;
+}
+
+.arrow-icon--arrow {
+  transition: fill 0.3s ease;
+}
+
+.link--arrowed:hover .arrow-icon {
+  transform: translate3d(-5px, 0, 0);
+}
+
+.link--arrowed:hover .arrow-icon--circle {
+  stroke-dashoffset: 0;
+}
+
+.link--arrowed:hover {
+  color: var(--clr-accent);
+}
+
+.link--arrowed:hover .arrow-icon--arrow {
+  fill: var(--clr-accent);
+}
+
+@media (max-width: 776px) {
+  .signup {
+    flex-direction: column;
+    height: 100%;
+  }
+  .signup__title {
+    margin-top: 1.8em;
+  }
+  .signup__form {
+    margin-right: 0;
+    margin-bottom: 3em;
+  }
+  .btn-submit .btn,
+  .btn-outline .btn {
+    width: 100%;
+  }
+  .social__login {
+    width: 100%;
+  }
+}

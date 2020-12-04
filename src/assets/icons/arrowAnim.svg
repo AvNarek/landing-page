@@ -1,0 +1,7 @@
+<svg className="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 32 32">
+  <g fill="none" stroke="#f53838" strokeWidth="1.5" strokeLinejoin="round" strokeMiterlimit="10">
+    <circle className="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+    <path className="arrow-icon--arrow"
+      d="M26.025 14.496l-14.286-.001 6.366-6.366L15.979 6 5.975 16.003 15.971 26l2.129-2.129-6.367-6.366h14.29z" />
+  </g>
+</svg>

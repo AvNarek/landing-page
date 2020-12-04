@@ -1,0 +1,134 @@
+.plan {
+  background-color: #f6f6f6;
+  text-align: center;
+  padding: 2em 0;
+}
+
+.plan__text {
+  width: 50%;
+  margin: 1.4em auto;
+}
+
+.plan__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 2em auto;
+  width: 80%;
+}
+
+.plan__item {
+  flex-basis: 27%;
+  display: flex;
+  height: 760px;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  align-items: center;
+  padding: 1.5em 0;
+  border: 2px solid #dddddd;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.plan__item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 2px 5px var(--clr-accent);
+  border-color: var(--clr-accent);
+}
+
+.plan__item-icon {
+  margin-bottom: 1em;
+}
+
+.plan__item-title {
+  font-style: 18px;
+  font-weight: var(--fw-med);
+}
+
+.plan__list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.plan__list-item {
+  padding: 0.4em;
+  padding-left: 1.4em;
+  position: relative;
+  text-align: left;
+}
+
+.plan__list-item::before {
+  content: '\2713';
+  color: #2fab73;
+  font-size: 16px;
+  font-weight: 600;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plan__price strong {
+  font-size: 25px;
+}
+
+.btn__plan {
+  margin-top: 0.8em;
+  background-color: transparent;
+  color: var(--clr-accent);
+  box-shadow: none;
+  border: 2px solid var(--clr-accent);
+  border-radius: 25px;
+  transition: all 0.2s ease-in-out;
+}
+
+.plan__item-active {
+  border-color: var(--clr-accent);
+}
+
+.plan__item-active .btn__plan,
+.btn__plan:hover {
+  background-color: var(--clr-accent);
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .plan__item {
+    flex: 0 1 220px;
+    height: 600px;
+    margin-bottom: 1em;
+  }
+  .plan__list-item {
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+  }
+  .plan__content {
+    justify-content: space-around;
+    width: 90%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 776px) {
+  .plan__content {
+    flex-direction: column;
+  }
+  .plan__item {
+    width: 90%;
+    height: 550px;
+  }
+  .plan__list-item {
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+  }
+  .plan__text {
+    width: 80%;
+  }
+}
