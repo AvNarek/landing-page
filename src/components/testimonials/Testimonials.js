@@ -11,48 +11,48 @@ import './Testimonials.css';
 const Testimonials = () => {
   const [users, setUsers] = useState([]);
   const [comments, setComments] = useState([]);
-  const [leftCounter, setLeftCounter] = useState(1);
-  const [itemCount, setItemCount] = useState(3);
-  const [activePageCount, setActivePageCount] = useState();
-  const [activePage, setActivePage] = useState(1);
-  const [rightCounter, setRightCounter] = useState(0);
+  const [flag, setFlag] = useState(0);
+  const [pageItemCount, setPageItemCount] = useState(3);
   const divRef = useRef(null);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
-    if (
-      document.documentElement.clientWidth < 883 &&
-      document.documentElement.clientWidth > 759
-    ) {
-      setItemCount(2);
-    } else if (document.documentElement.clientWidth < 759) {
-      setItemCount(1);
-    } else {
-      setItemCount(3);
-    }
-    setActivePageCount(Math.round(users.length / itemCount));
+  useEffect(() => {
+    const deviceWidth = window.screen.width;
 
-    const results = (
-      await fetch('https://jsonplaceholder.typicode.com/users')
-    ).json();
-    const data = await results;
-    setUsers(data);
-    setRightCounter(data.length - itemCount);
+    deviceWidth < 900 && deviceWidth > 776
+      ? setPageItemCount(2)
+      : deviceWidth < 776
+      ? setPageItemCount(1)
+      : setPageItemCount(3);
+  }, []);
 
-    const commentResults = (
-      await fetch('https://jsonplaceholder.typicode.com/comments')
-    ).json();
-    const comm = await commentResults;
-    setComments(comm);
-  }, [itemCount, users.length]);
+  useEffect(() => {
+    divRef.current.style.transform = `translateX(calc((100% / ${pageItemCount}) * ${flag}))`;
+  }, [flag, pageItemCount]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const results = (
+        await fetch('https://jsonplaceholder.typicode.com/users')
+      ).json();
+      const data = await results;
+      setUsers(data);
+
+      const commentResults = (
+        await fetch('https://jsonplaceholder.typicode.com/comments')
+      ).json();
+      const comm = await commentResults;
+      setComments(comm);
+    };
+    fetchData();
+  }, []);
 
   function createButtons() {
     const buttons = [];
 
-    for (let i = 1; i <= activePageCount; i++) {
+    for (let i = 1; i <= Math.ceil(users.length / pageItemCount); i++) {
       buttons.push(
         <span
-          className={`card__item ${i === activePage ? 'card__item-open' : ''}`}
+          className={`card__item ${i === 1 ? 'card__item-open' : ''}`}
           key={i}
           id={i}
         />
@@ -60,51 +60,6 @@ const Testimonials = () => {
     }
     return buttons;
   }
-
-  const leftHandler = () => {
-    const items = divRef.current.childNodes;
-
-    if (rightCounter === 0) {
-      setRightCounter(users.length - itemCount);
-    } else {
-      setRightCounter(rightCounter - 1);
-      setLeftCounter(rightCounter + 1);
-    }
-    items.forEach((item) => {
-      item.style.transform = `translateX(-${100 * rightCounter}%)`;
-    });
-    if (rightCounter === users.length - itemCount) {
-      setLeftCounter(0);
-    }
-    if (rightCounter % itemCount === 0) {
-      activePage > 1
-        ? setActivePage(activePage - 1)
-        : setActivePage(activePageCount);
-    }
-  };
-
-  const rightHandler = () => {
-    const items = divRef.current.childNodes;
-
-    if (leftCounter === users.length - itemCount) {
-      setLeftCounter(0);
-    } else {
-      setLeftCounter(leftCounter + 1);
-      setRightCounter(leftCounter - 1);
-    }
-    if (leftCounter === 0) {
-      setRightCounter(users.length - itemCount);
-    }
-
-    items.forEach((item) => {
-      item.style.transform = `translateX(-${100 * leftCounter}%)`;
-    });
-    if (leftCounter % itemCount === 0) {
-      activePage >= activePageCount
-        ? setActivePage(1)
-        : setActivePage(activePage + 1);
-    }
-  };
 
   return (
     <div className="testimonials" id="testimonials">
@@ -149,10 +104,24 @@ const Testimonials = () => {
       <div className="testimonials__carousel">
         <div className="card__item-group">{createButtons()}</div>
         <div className="btn__carousel-group">
-          <Button className="btn__carousel" onClick={leftHandler}>
+          <Button
+            className="btn__carousel"
+            onClick={() => {
+              flag === 0
+                ? setFlag(-(users.length - pageItemCount))
+                : setFlag(flag + 1);
+            }}
+          >
             <ArrowLeft />
           </Button>
-          <Button className="btn__carousel" onClick={rightHandler}>
+          <Button
+            className="btn__carousel"
+            onClick={() => {
+              flag === -(users.length - pageItemCount)
+                ? setFlag(0)
+                : setFlag(flag - 1);
+            }}
+          >
             <ArrowRight />
           </Button>
         </div>
